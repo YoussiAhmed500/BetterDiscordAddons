@@ -16,6 +16,11 @@ module.exports = (_ => {
 			"author": "DevilBro",
 			"version": "2.8.7",
 			"description": "Display channels that are hidden from you by role restrictions"
+			
+			"name": "ShowHiddenChannelsChat",
+			"author": "DevilBro",
+			"version": "2.8.7",
+			"description": "Display channels Chat that are hidden from you by role restrictions"
 		},
 		"changeLog": {
 			"fixed": {
@@ -158,6 +163,21 @@ module.exports = (_ => {
 					settings: {
 						sortNative:				{value: false, 	description: "Sort hidden Channels in the native Order"},
 						showText:				{value: true, 	description: "Show hidden Text Channels"},
+						showVoice:				{value: true, 	description: "Show hidden Voice Channels"},
+						showAnnouncement:		{value: true, 	description: "Show hidden Announcement Channels"},
+						showStore:				{value: true, 	description: "Show hidden Store Channels"},
+						showForNormal:			{value: true,	description: "Add Access-Overview ContextMenu Entry for non-hidden Channels"},
+					}
+				};
+				
+				return class ShowHiddenChannelsChat extends Plugin {
+			onLoad () {
+				overrideTypes = Object.keys(BDFDB.DiscordConstants.PermissionOverrideType);
+				 
+				this.defaults = {
+					settings: {
+						sortNative:				{value: false, 	description: "Sort hidden Channels in the native Order"},
+						showChat:				{value: true, 	description: "Show hidden Text Channels"},
 						showVoice:				{value: true, 	description: "Show hidden Voice Channels"},
 						showAnnouncement:		{value: true, 	description: "Show hidden Announcement Channels"},
 						showStore:				{value: true, 	description: "Show hidden Store Channels"},
@@ -742,6 +762,13 @@ module.exports = (_ => {
 							context_hidehidden:					"Hide Locked Channels",
 							modal_allowed:						"Permitted",
 							modal_denied:						"Denied"
+				};
+					default:		// English
+						return {
+							context_hidehidden:					"Hide Locked ChannelsChats",	                                               
+							modal_allowed:						"Permitted",
+							modal_denied:						"Denied"			
+				
 						};
 				}
 			}
